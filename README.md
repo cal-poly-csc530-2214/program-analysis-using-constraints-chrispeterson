@@ -371,4 +371,69 @@ The code I used to run this through z3 is in this github (it's messy, but I thin
 
 ## Results
 
-As I have it defined, the problem seems under-constrained. When 
+The equation used was defined as:
+```
+a1x + a2y + a3 >= 0 ∨ a4x + a5y + a6 >= 0
+```
+
+In order to test my solver equations, I did a few tests. In general the equations seemed under-constrained (many solutions were possible, some were not useful), but correct:
+
+### Confirming paper's solution
+
+The solution used by the paper was:
+```
+a1 = -1
+a2 = 0
+a3 = -1
+a4 = 0
+a5 = 1
+a6 = -1
+
+resulting in:
+x < 0 V y > 0
+```
+
+When I plug these values in for the a's in the solver, I get a valid solution.
+
+### Solver limited to -1 >= a >= 1
+
+Without limiting the a values, I got many weird solutions. When I did limit the a's to be between -1 and 1 (inclusive), I got the following:
+
+```
+a1 = 0
+a2 = 1
+a3 = -1
+a4 = -1
+a5 = 0
+a6 = -1
+
+resulting in:
+y > 0 V x <0
+```
+
+Which exactly matches the results from the paper! This was awesome to see, although the paper didn't seem to mention anything about restricting the values a can take on and I'm using some hindsight analysis to come to this conclusion.
+
+I suspect that the algorithm implemented by the paper resolves this issue by either iteratively restricting a values to the "most probable" ones, or is able to dodge this issue entirely by first trying more simple forms (less than 6 variables to solve for) and slowly moving up the complexity.
+
+### Solver without limited a values
+
+Just for fun and to show something isn't quite right, here's what the solver comes up with if I don't place any restrictions on the a values:
+
+```
+a1 = -1
+a2 = 0
+a3 = -50
+a4 = -6
+a5 = 14
+a6 = -27
+
+resulting in:
+-x - 50 >= 0 V -6x + 14y - 27 >= 0
+
+which simplifies a bit to become:
+x <= -50 V 14y - 6x >= 27
+```
+
+This is definitely not equivilant to the supplied solution. I ran out of time while working on this (would be interesting to show that this solution does or does not work), but I think it's reasonable to assume this solution is wrong and the problem is underconstrained a bit.
+
+##
