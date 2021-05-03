@@ -116,24 +116,34 @@ which becomes:
 ```
 
 Distributing the and in order to get to CNF:
-
 ```
 (!(e1 >= 0) V !(e3 >= 0) V e4 >= 0 V e5 >= 0) ^ (!(e2 >= 0) V !(e3 >= 0) V e4 >= 0 V e5 >= 0)
 ```
 
-This part is the same, thankfully:
+Double negation in order to do De'Morgan's again to be in from required by Farkas' lemma:
 ```
-e1 >= 0 becomes !(-e1 - 1 >= 0)
-e2 >= 0 becomes !(-e2 - 1 >= 0)
+!!(!(e1 >= 0) V !(e3 >= 0) V e4 >= 0 V e5 >= 0) ^ !!(!(e2 >= 0) V !(e3 >= 0) V e4 >= 0 V e5 >= 0)
+
+De'Morgan's:
+!(e1 >= 0 ^ e3 >= 0 ^ !(e4 >= 0) ^ !(e5 >= 0)) ^ !(e2 >= 0 ^ e3 >= 0 ^ !(e4 >= 0) ^ !(e5 >= 0))
+```
+
+Doing the same trick as before in order to make each piece into non-negated expression appropriate for Farkas' lemma:
+```
+e4 >= 0 becomes !(-e4 - 1 >= 0)
+etc...
 
 resulting in:
-(a1x + a2y + a3 >= 0 ∨ a4x + a5y + a6 >= 0) ^ (x < 0) => !(-e1 - 1 >= 0) V !(-e2 - 1 >= 0)
-
-De'Morgan's law:
-(a1x + a2y + a3 >= 0 ∨ a4x + a5y + a6 >= 0) ^ (x < 0) => !((-e1 - 1 >= 0) ^ !(-e2 - 1 >= 0))
+!(e1 >= 0 ^ e3 >= 0 ^ (-e4 - 1 >= 0) ^ (-e5 - 1 >= 0)) ^ (e2 >= 0 ^ e3 >= 0 ^ (-e4 - 1 >= 0) ^ (-e5 - 1 >= 0))
 ```
 
-Applying Farkas' lemma. I don't fully understand where/when exactly the quantifier ``∀x,y`` comes in to allow for the lemma usage, but it seems to have been implied throughout all the previous calculations (since these statements for I must hold for all values of ``x`` and ``y``, otherwise they wouldn't be very useful):
+Applying Farkas' lemma to each part. The (previously implied, now shown) universal quantifier can be pushed down into the and statement, allowing this.
 ```
-∃λ > 0, λ1,λ2 >= 0(∀x,y λ1(−e1 − 1) + λ2(−e2 − 1) = −λ)
+∀x,y !(e1 >= 0 ^ e3 >= 0 ^ (-e4 - 1 >= 0) ^ (-e5 - 1 >= 0)) ^ (e2 >= 0 ^ e3 >= 0 ^ (-e4 - 1 >= 0) ^ (-e5 - 1 >= 0))
+
+pushing down the quantifier, since it's universal with an and this doesn't change the meaning:
+(∀x,y !(e1 >= 0 ^ e3 >= 0 ^ (-e4 - 1 >= 0) ^ (-e5 - 1 >= 0))) ^ (∀x,y (e2 >= 0 ^ e3 >= 0 ^ (-e4 - 1 >= 0) ^ (-e5 - 1 >= 0)))
+
+Farkas' lemma:
+(∃λ > 0, λ1,λ3,λ4,λ5 >= 0(∀x,y λ1e1 + λ3e3 + λ4(-e4 - 1) + λ5(-e5 - 1) = −λ)) ^ (∃λ > 0, λ1,λ2,λ4,λ5 >= 0(∀x,y λ1e1 + λ2e2 + λ4(-e4 - 1) + λ5(-e5 - 1) = −λ))
 ```
