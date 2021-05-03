@@ -211,19 +211,19 @@ resulting expression: λ2a5 - λ4a1 - λ4a2 - λ5a4 - λ5a5 = 0
 terms without x or y: λ2a6 - λ3 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ
 
 final expression (I think?):
-∃λ > 0, λ1,λ2,λ4,λ5 >= 0 ((λ2a4 - λ3 - λ4a1 - λ5a4 = 0) ^ (λ2a5 - λ4a1 - λ4a2 - λ5a4 - λ5a5 = 0) ^ (λ2a6 - λ3 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ))
+∃λ > 0, λ2,λ3,λ4,λ5 >= 0 ((λ2a4 - λ3 - λ4a1 - λ5a4 = 0) ^ (λ2a5 - λ4a1 - λ4a2 - λ5a4 - λ5a5 = 0) ^ (λ2a6 - λ3 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ))
 ```
 
 Taking the two expressions together places additional constraints on the a values:
 ```
 ∃λ > 0, λ1,λ3,λ4,λ5 >= 0 ((λ1a1 - λ3 - λ4a1 - λ5a4 = 0) ^ (λ1a2 - λ4a1 - λ4a2 - λ5a4 - λ5a5 = 0) ^ (λ1a3 - λ3 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ))
 and
-∃λ > 0, λ1,λ2,λ4,λ5 >= 0 ((λ2a4 - λ3 - λ4a1 - λ5a4 = 0) ^ (λ2a5 - λ4a1 - λ4a2 - λ5a4 - λ5a5 = 0) ^ (λ2a6 - λ3 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ))
+∃λ > 0, λ2,λ3,λ4,λ5 >= 0 ((λ2a4 - λ3 - λ4a1 - λ5a4 = 0) ^ (λ2a5 - λ4a1 - λ4a2 - λ5a4 - λ5a5 = 0) ^ (λ2a6 - λ3 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ))
 ```
 
 ### Statement 3
 
-Statement 3 is simpler than Statement 2, but not by much and I'm completely on my own for this one:
+Statement 3 is simpler than Statement 2 and has a lot of repeated calculation, but I don't have a paper or book to guide me.
 
 ``I ^ x >= 0 => y > 0`` becomes ``(a1x + a2y + a3 >= 0 ∨ a4x + a5y + a6 >= 0) ^ (x >= 0) => y > 0`` by substitution.
 
@@ -310,7 +310,7 @@ resulting expression: λ1a2 - λ4 = 0
 terms without x or y: λ1a3 = −λ
 
 final expression (I think?):
-∃λ > 0, λ1,λ3,λ4 >= 0 ((λ1a1x + λ3x) ^ (λ1a2y - λ4y) ^ (λ1a3 = −λ))
+∃λ > 0, λ1,λ3,λ4 >= 0 ((λ1a1 + λ3 = 0) ^ (λ1a2 - λ4 = 0) ^ (λ1a3 = −λ))
 ```
 
 Looking at the inner part of the second term:
@@ -339,12 +339,36 @@ resulting expression: λ2a5 - λ4 = 0
 terms without x or y: λ2a6 = −λ
 
 final expression (I think?):
-∃λ > 0, λ1,λ3,λ4,λ5 >= 0 ((λ2a4 + λ3 = 0) ^ (λ2a5 - λ4 = 0) ^ (λ2a6 = −λ))
+∃λ > 0, λ2,λ3,λ4 >= 0 ((λ2a4 + λ3 = 0) ^ (λ2a5 - λ4 = 0) ^ (λ2a6 = −λ))
 ```
 
 Once again, the final outcome is the and of two statements:
 ```
-∃λ > 0, λ1,λ3,λ4 >= 0 ((λ1a1x + λ3x) ^ (λ1a2y - λ4y) ^ (λ1a3 = −λ))
+∃λ > 0, λ1,λ3,λ4 >= 0 ((λ1a1 + λ3 = 0) ^ (λ1a2 - λ4 = 0) ^ (λ1a3 = −λ))
 and
-∃λ > 0, λ1,λ3,λ4,λ5 >= 0 ((λ2a4 + λ3 = 0) ^ (λ2a5 - λ4 = 0) ^ (λ2a6 = −λ))
+∃λ > 0, λ2,λ3,λ4 >= 0 ((λ2a4 + λ3 = 0) ^ (λ2a5 - λ4 = 0) ^ (λ2a6 = −λ))
 ```
+
+### Putting it all together
+
+The results of the previous statements were:
+```
+Statement 1:
+∃λ > 0, λ1,λ2 >= 0 ((-a2λ1 - a5λ2 = 0) ^ (50a1λ1 - a3λ1 − λ1 + 50a4λ2 - a6λ2 − λ2 = −λ))
+
+Statement 2:
+∃λ > 0, λ1,λ3,λ4,λ5 >= 0 ((λ1a1 - λ3 - λ4a1 - λ5a4 = 0) ^ (λ1a2 - λ4a1 - λ4a2 - λ5a4 - λ5a5 = 0) ^ (λ1a3 - λ3 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ))
+and
+∃λ > 0, λ2,λ3,λ4,λ5 >= 0 ((λ2a4 - λ3 - λ4a1 - λ5a4 = 0) ^ (λ2a5 - λ4a1 - λ4a2 - λ5a4 - λ5a5 = 0) ^ (λ2a6 - λ3 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ))
+
+Statement 3:
+∃λ > 0, λ1,λ3,λ4 >= 0 ((λ1a1 + λ3 = 0) ^ (λ1a2 - λ4 = 0) ^ (λ1a3 = −λ))
+and
+∃λ > 0, λ2,λ3,λ4 >= 0 ((λ2a4 + λ3 = 0) ^ (λ2a5 - λ4 = 0) ^ (λ2a6 = −λ))
+```
+
+The code I used to run this through z3 is in this github (it's messy, but I think it's correct).
+
+## Results
+
+As I have it defined, the problem seems under-constrained. When 
