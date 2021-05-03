@@ -147,3 +147,76 @@ pushing down the quantifier, since it's universal with an and this doesn't chang
 Farkas' lemma:
 (∃λ > 0, λ1,λ3,λ4,λ5 >= 0(∀x,y λ1e1 + λ3e3 + λ4(-e4 - 1) + λ5(-e5 - 1) = −λ)) ^ (∃λ > 0, λ1,λ2,λ4,λ5 >= 0(∀x,y λ1e1 + λ2e2 + λ4(-e4 - 1) + λ5(-e5 - 1) = −λ))
 ```
+
+Looking at the inner part of the first term:
+```
+λ1e1 + λ3e3 + λ4(-e4 - 1) + λ5(-e5 - 1) = −λ
+
+e1 = a1x + a2y + a3
+e2 = a4x + a5y + a6
+e3 = -x - 1
+e4 = a1(x + y) + a2(y + 1) + a3
+e5 = a4(x + y) + a5(y + 1) + a6
+
+putting the e's back in:
+λ1(a1x + a2y + a3) + λ3(-x - 1) + λ4(-a1(x + y) - a2(y + 1) - a3 - 1) + λ5(-a4(x + y) - a5(y + 1) - a6 - 1) = −λ
+
+not distributing the λis, as that'd just make it more complicated:
+λ1(a1x + a2y + a3) + λ3(-x - 1) + λ4(-a1x - a1y - a2y - a2 - a3 - 1) + λ5(-a4x - a4y - a5y - a5 - a6 - 1) = −λ
+```
+
+Same process as before:
+```
+∀x,y λ1(a1x + a2y + a3) + λ3(-x - 1) + λ4(-a1x - a1y - a2y - a2 - a3 - 1) + λ5(-a4x - a4y - a5y - a5 - a6 - 1) = −λ
+
+terms with x: λ1a1x - λ3x - λ4a1x - λ5a4x
+resulting expression: λ1a1 - λ3 - λ4a1 - λ5a4 = 0
+
+terms with y: λ1a2y - λ4a1y - λ4a2y - λ5a4y - λ5a5y
+resulting expression: λ1a2 - λ4a1 - λ4a2 - λ5a4 - λ5a5 = 0
+
+terms without x or y: λ1a3 - λ3 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ
+
+final expression (I think?):
+∃λ > 0, λ1,λ3,λ4,λ5 >= 0 ((λ1a1 - λ3 - λ4a1 - λ5a4 = 0) ^ (λ1a2 - λ4a1 - λ4a2 - λ5a4 - λ5a5 = 0) ^ (λ1a3 - λ3 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ))
+```
+
+Looking at the inner part of the second term:
+```
+λ1e1 + λ2e2 + λ4(-e4 - 1) + λ5(-e5 - 1) = −λ
+
+e1 = a1x + a2y + a3
+e2 = a4x + a5y + a6
+e3 = -x - 1
+e4 = a1(x + y) + a2(y + 1) + a3
+e5 = a4(x + y) + a5(y + 1) + a6
+
+putting the e's back in:
+λ1(a1x + a2y + a3) + λ2(a4x + a5y + a6) + λ4(-a1(x + y) - a2(y + 1) - a3 - 1) + λ5(-a4(x + y) - a5(y + 1) - a6 - 1) = −λ
+
+not distributing the λis, as that'd just make it more complicated:
+λ1(a1x + a2y + a3) + λ2(a4x + a5y + a6) + λ4(-a1x - a1y - a2y - a2 - a3 - 1) + λ5(-a4x - a4y - a5y - a5 - a6 - 1) = −λ
+```
+
+Same process as before (again):
+```
+∀x,y λ1(a1x + a2y + a3) + λ2(a4x + a5y + a6) + λ4(-a1x - a1y - a2y - a2 - a3 - 1) + λ5(-a4x - a4y - a5y - a5 - a6 - 1) = −λ
+
+terms with x: λ1a1x + λ2a4x - λ4a1x - λ5a4x
+resulting expression: λ1a1 - λ2a4 - λ4a1 - λ5a4 = 0
+
+terms with y: λ1a2y + λ2a5y - λ4a2y - λ5a4y - λ5a5y
+resulting expression: λ1a2 + λ2a5 - λ4a2 - λ5a4 - λ5a5 = 0
+
+terms without x or y: λ1a3 + λ2a6 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ
+
+final expression (I think?):
+∃λ > 0, λ1,λ3,λ4,λ5 >= 0 ((λ1a1 - λ2a4 - λ4a1 - λ5a4 = 0) ^ (λ1a2 + λ2a5 - λ4a2 - λ5a4 - λ5a5 = 0) ^ (λ1a3 + λ2a6 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ))
+```
+
+Taking the two expressions together places additional constraints on the a values:
+```
+∃λ > 0, λ1,λ3,λ4,λ5 >= 0 ((λ1a1 - λ3 - λ4a1 - λ5a4 = 0) ^ (λ1a2 - λ4a1 - λ4a2 - λ5a4 - λ5a5 = 0) ^ (λ1a3 - λ3 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ))
+and
+∃λ > 0, λ1,λ3,λ4,λ5 >= 0 ((λ1a1 - λ2a4 - λ4a1 - λ5a4 = 0) ^ (λ1a2 + λ2a5 - λ4a2 - λ5a4 - λ5a5 = 0) ^ (λ1a3 + λ2a6 + λ4(-a2 - a3 - 1) + λ5(-a5 - a6 - 1) = −λ))
+```
