@@ -2,6 +2,7 @@
 
 ## What I did
 
+I focused entirely on the Program Verification section of this paper (as that got the most attention in lecture), and specifically on trying to understand and validate the mathematical process used to go from the 2nd-order logic statements into something solvable by z3. This was an extremely long process (as shown below), and took around 6 hours to get into a working state. I'm more than satisfied with this analysis, although it would certainly be an interesting challenge to try to automate this process.
 
 ## Calculation by hand
 
@@ -436,4 +437,6 @@ x <= -50 V 14y - 6x >= 27
 
 This is definitely not equivilant to the supplied solution. I ran out of time while working on this (would be interesting to show that this solution does or does not work), but I think it's reasonable to assume this solution is wrong and the problem is underconstrained a bit.
 
-##
+## Future work
+
+Given substantially more time, it'd be an interesting challenge to automate this process. I've completely skimmed over many important details (cut point stuff), which would add even more complexity.
